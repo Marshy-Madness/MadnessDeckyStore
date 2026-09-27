@@ -1,0 +1,83 @@
+# Shared release workflow for every plugin repo. Each plugin calls it from its
+# own .github/workflows/release.yml:
+#
+#   on: { push: { tags: ['v*'] }, workflow_dispatch: {} }
+#   permissions: { contents: write }
+#   jobs:
+#     release:
+#       uses: Marshy-Madness/MadnessDeckyStore/.github/workflows/release-plugin.yml@main
+#       secrets: inherit
+#
+# The version always comes from package.json. Pushing tag v<version> or running
+# the workflow by hand builds <repo>-<version>.zip and publishes it as release
+# v<version>. If the plugin repo has a STORE_TOKEN secret, the store is rebuilt
+# straight away; otherwise the store's schedule picks it up within 30 minutes.
+
+name: Release plugin
+
+on:
+  workflow_call:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Marshy-Madness/MadnessDeckyStore
+          path: .store
+          sparse-checkout: scripts
+
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(jq -r .version package.json)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "v$VERSION" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $VERSION"
+            exit 1
+          fi
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "::error::Release v$VERSION already exists. Bump the version in package.json."
+            exit 1
+          fi
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Build
+        run: |
+          if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
+          pnpm run build
+
+      - name: Package
+        id: package
+        run: echo "zip=$(.store/scripts/package-plugin.sh . dist-zip "${GITHUB_REPOSITORY#*/}")" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        run: |
+          gh release create "v${{ steps.version.outputs.version }}" "${{ steps.package.outputs.zip }}" \
+            --title "v${{ steps.version.outputs.version }}" --generate-notes --target "$GITHUB_SHA"
+
+      - name: Rebuild store
+        env:
+          STORE_TOKEN: ${{ secrets.STORE_TOKEN }}
+        run: |
+          if [ -z "$STORE_TOKEN" ]; then
+            echo "No STORE_TOKEN secret; the store's schedule will pick this release up."
+            exit 0
+          fi
+          GH_TOKEN="$STORE_TOKEN" gh workflow run build-store.yml -R Marshy-Madness/MadnessDeckyStore

@@ -1,0 +1,47 @@
+# Regenerates plugins.json from the plugins' GitHub releases and commits it if
+# anything changed. The Cloudflare Worker serves whatever is on main.
+
+name: Build store
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
+  push:
+    branches: [main]
+    paths: [store.toml, .gitmodules, build_store.py, 'assets/**']
+
+concurrency:
+  group: build-store
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Build plugins.json
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          STORE_REPO: ${{ github.repository }}
+        run: python build_store.py
+
+      - name: Commit if changed
+        run: |
+          git add plugins.json
+          if git diff --cached --quiet; then
+            echo "plugins.json unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update plugins.json"
+          git push

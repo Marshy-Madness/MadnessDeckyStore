@@ -1,0 +1,27 @@
+# Which plugin submodules are listed in the store.
+#
+# Every plugins/<folder> submodule needs a [plugins.<folder>] table with a
+# unique, permanent `id`. Never reuse or renumber ids; Decky tracks entries
+# by them. A plugin only appears once it has a published GitHub release.
+#
+# Optional overrides for what the plugin's own plugin.json says:
+#   name, author, description, tags = [...], image_url
+#   prereleases = true   also list GitHub prereleases
+#   hidden = true        pull it from the store without removing the submodule
+# Store artwork: assets/<folder>.png (or .jpg/.webp), 16:9 looks best.
+
+[defaults]
+author = "MarshyMadness"
+tags = ["utilities"]
+
+[plugins.zipline-auto-uploader]
+id = 1
+
+[plugins.decky-smart-launcher]
+id = 2
+
+[plugins.decky-session-notes]
+id = 3
+
+[plugins.deck-launcher]
+id = 4

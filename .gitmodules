@@ -1,0 +1,12 @@
+[submodule "plugins/zipline-auto-uploader"]
+	path = plugins/zipline-auto-uploader
+	url = https://github.com/Marshy-Madness/zipline-auto-uploader.git
+[submodule "plugins/decky-smart-launcher"]
+	path = plugins/decky-smart-launcher
+	url = https://github.com/Marshy-Madness/decky-smart-launcher.git
+[submodule "plugins/decky-session-notes"]
+	path = plugins/decky-session-notes
+	url = https://github.com/Marshy-Madness/decky-session-notes.git
+[submodule "plugins/deck-launcher"]
+	path = plugins/deck-launcher
+	url = https://github.com/Marshy-Madness/deck-launcher.git
