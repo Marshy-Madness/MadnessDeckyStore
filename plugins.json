@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "zipline-uploader",
+    "author": "MarshyMadness",
+    "description": "Monitors the Steam Deck screenshot folder and uploads new images/videos to Zipline.",
+    "tags": [
+      "utility",
+      "upload",
+      "zipline",
+      "screenshots"
+    ],
+    "image_url": "https://zipline.marshymadness.com/u/2025-11-18_21_11.png",
+    "versions": [
+      {
+        "name": "1.0.0",
+        "hash": "e1c4c0a09b80da5144cb6be93ce8dc409a42a959622ae9dd4ab107b455ffadfa",
+        "artifact": "https://github.com/Marshy-Madness/zipline-auto-uploader/releases/download/v1.0.0/zipline-auto-uploader.zip"
+      }
+    ]
+  }
+]
