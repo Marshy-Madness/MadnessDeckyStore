@@ -25,3 +25,6 @@ id = 3
 
 [plugins.deck-launcher]
 id = 4
+
+[plugins.gg-deals]
+id = 5

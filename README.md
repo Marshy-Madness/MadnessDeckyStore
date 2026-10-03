@@ -12,6 +12,7 @@ Each plugin lives in **its own repository** and publishes its own releases. This
 | Smart Game Launcher | [decky-smart-launcher](https://github.com/Marshy-Madness/decky-smart-launcher) | Picks the Steam, desktop or streamed version of a game based on availability and network |
 | Session Notes | [decky-session-notes](https://github.com/Marshy-Madness/decky-session-notes) | Per-game session notes, run tracking and stats |
 | Deck Launcher | [deck-launcher](https://github.com/Marshy-Madness/deck-launcher) | Launch games remotely by NFC tap, QR code or Home Assistant |
+| gg.deals | [gg-deals](https://github.com/Marshy-Madness/gg-deals) | Shows the lowest current gg.deals price on Steam store pages |
 
 ## Using the store on a Deck
 

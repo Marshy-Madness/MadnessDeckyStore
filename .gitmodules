@@ -10,3 +10,6 @@
 [submodule "plugins/deck-launcher"]
 	path = plugins/deck-launcher
 	url = https://github.com/Marshy-Madness/deck-launcher.git
+[submodule "plugins/gg-deals"]
+	path = plugins/gg-deals
+	url = https://github.com/Marshy-Madness/gg-deals.git
