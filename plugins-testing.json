@@ -91,5 +91,24 @@
         "artifact": "https://github.com/Marshy-Madness/deck-launcher/releases/download/v1.0.0/deck-launcher-1.0.0.zip"
       }
     ]
+  },
+  {
+    "id": 5,
+    "name": "gg.deals",
+    "author": "Marshy-Madness",
+    "description": "Shows the lowest current price from gg.deals on Steam store pages.",
+    "tags": [
+      "store",
+      "prices",
+      "deals"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "0.1.0-beta.1",
+        "hash": "25541531eda3cadfd68471d78657d63f294192c59acc40be6e555dfdd783569a",
+        "artifact": "https://github.com/Marshy-Madness/gg-deals/releases/download/v0.1.0-beta.1/gg-deals-0.1.0-beta.1.zip"
+      }
+    ]
   }
 ]
