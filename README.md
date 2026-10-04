@@ -22,15 +22,25 @@ Go to **Decky → Settings → General → Store Channel → Custom** and set th
 https://madness-decky-store.<your-subdomain>.workers.dev
 ```
 
-The plugins above now show in the store tab and get update notifications. Switching back to **Default** brings back the official store, and installed plugins stay installed. Only one channel is active at a time, so plugins from the official store won't show update prompts while you're on Custom.
+The plugins above now show in the store tab and get update notifications.
+
+### Testing channel
+
+To try prerelease builds before they reach everyone, use the same URL with `/testing` on the end:
+
+```
+https://madness-decky-store.<your-subdomain>.workers.dev/testing
+```
+
+It lists every stable release plus prereleases, newest first, so you get update prompts for both. Plugins that only have prereleases so far appear only here. Switch back to the plain URL to go back to stable. Installed prerelease versions stay installed and get replaced when the next stable release comes out. Switching back to **Default** brings back the official store, and installed plugins stay installed. Only one channel is active at a time, so plugins from the official store won't show update prompts while you're on Custom.
 
 ## How it works
 
 Decky's custom store is a single URL that returns a JSON list of plugins and their versions. Each version has a zip URL and a SHA-256 hash.
 
-1. **Releasing a plugin:** bump `version` in its `package.json`, commit, then `git tag v<version> && git push --follow-tags`. You can also run its *Release* workflow on GitHub. The plugin's `release.yml` calls [`release-plugin.yml`](.github/workflows/release-plugin.yml) here, which builds, packages with [`scripts/package-plugin.sh`](scripts/package-plugin.sh), and publishes `<repo>-<version>.zip` as a GitHub release.
-2. **Building the store:** [`build-store.yml`](.github/workflows/build-store.yml) runs [`build_store.py`](build_store.py) every 30 minutes, on changes to `store.toml`, and on demand. It reads each submodule's `plugin.json` and releases from GitHub, then commits `plugins.json` if anything changed.
-3. **Serving:** [`worker.js`](worker.js), a Cloudflare Worker, serves `plugins.json` from this repo. Decky's request triggers a CORS preflight that GitHub can't answer; without the Worker, the store tab spins forever.
+1. **Releasing a plugin:** bump `version` in its `package.json`, commit, then `git tag v<version> && git push --follow-tags`. A version with a dash, such as `0.2.0-beta.1`, is published as a prerelease and only appears in the testing channel. You can also run its *Release* workflow on GitHub. The plugin's `release.yml` calls [`release-plugin.yml`](.github/workflows/release-plugin.yml) here, which builds, packages with [`scripts/package-plugin.sh`](scripts/package-plugin.sh), and publishes `<repo>-<version>.zip` as a GitHub release.
+2. **Building the store:** [`build-store.yml`](.github/workflows/build-store.yml) runs [`build_store.py`](build_store.py) every 30 minutes, on changes to `store.toml`, and on demand. It reads each submodule's `plugin.json` and releases from GitHub, then commits `plugins.json` (stable) and `plugins-testing.json` (stable plus prereleases) if anything changed.
+3. **Serving:** [`worker.js`](worker.js), a Cloudflare Worker, serves `plugins.json` from this repo, or `plugins-testing.json` at `/testing`. Decky's request triggers a CORS preflight that GitHub can't answer; without the Worker, the store tab spins forever.
 
 If a plugin repo has a `STORE_TOKEN` secret, its releases trigger a store rebuild immediately instead of waiting for the next scheduled run. Use a fine-grained token with *Actions: read and write* on this repo only.
 

@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "name": "zipline-uploader",
+    "author": "MarshyMadness",
+    "description": "Monitors the Steam Deck screenshot folder and uploads new images/videos to Zipline.",
+    "tags": [
+      "utility",
+      "upload",
+      "zipline",
+      "screenshots"
+    ],
+    "image_url": "https://zipline.marshymadness.com/u/2025-11-18_21_11.png",
+    "versions": [
+      {
+        "name": "1.0.1",
+        "hash": "160580f5b4d63d06ca2d2497ea83f5b0ea4a7a16502c51d2e7dd64faa9b3a728",
+        "artifact": "https://github.com/Marshy-Madness/zipline-auto-uploader/releases/download/v1.0.1/zipline-auto-uploader-1.0.1.zip"
+      },
+      {
+        "name": "1.0.0",
+        "hash": "e1c4c0a09b80da5144cb6be93ce8dc409a42a959622ae9dd4ab107b455ffadfa",
+        "artifact": "https://github.com/Marshy-Madness/zipline-auto-uploader/releases/download/v1.0.0/zipline-auto-uploader.zip"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Smart Game Launcher",
+    "author": "marshymadness",
+    "description": "Automatically choose the Steam, desktop or streamed version of a game based on availability and network state.",
+    "tags": [
+      "launcher",
+      "streaming",
+      "quality of life"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "0.1.0",
+        "hash": "a5daea5e81f72081f19231d84cec6a52a072a2d26aca43ea39262457defe5167",
+        "artifact": "https://github.com/Marshy-Madness/decky-smart-launcher/releases/download/v0.1.0/decky-smart-launcher-0.1.0.zip"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Session Notes",
+    "author": "MarshyMadness",
+    "description": "Per-game session notes, run tracking, and stats.",
+    "tags": [
+      "utility"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "0.0.1",
+        "hash": "2a2538bc3ac25471c153bdf46b6a9aa7a2d1849622d3683b8c69d0d621bc3175",
+        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.0.1/decky-session-notes-0.0.1.zip"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Deck Launcher",
+    "author": "marshymadness",
+    "description": "Launch Steam games remotely via NFC card tap, QR code scan from your phone, or Home Assistant automations.",
+    "tags": [
+      "nfc",
+      "qr",
+      "launch",
+      "homeassistant",
+      "remote",
+      "tools"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "1.0.0",
+        "hash": "bd9ef506a4a0a17fd5a833a1a296d551dee769383760a3616fc88f676a204c88",
+        "artifact": "https://github.com/Marshy-Madness/deck-launcher/releases/download/v1.0.0/deck-launcher-1.0.0.zip"
+      }
+    ]
+  }
+]

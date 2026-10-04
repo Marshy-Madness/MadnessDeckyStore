@@ -1,4 +1,4 @@
-# Regenerates plugins.json from the plugins' GitHub releases and commits it if
+# Regenerates plugins.json and plugins-testing.json from the plugins' GitHub releases and commits it if
 # anything changed. The Cloudflare Worker serves whatever is on main.
 
 name: Build store
@@ -36,9 +36,9 @@ jobs:
 
       - name: Commit if changed
         run: |
-          git add plugins.json
+          git add plugins.json plugins-testing.json
           if git diff --cached --quiet; then
-            echo "plugins.json unchanged"
+            echo "store files unchanged"
             exit 0
           fi
           git config user.name "github-actions[bot]"

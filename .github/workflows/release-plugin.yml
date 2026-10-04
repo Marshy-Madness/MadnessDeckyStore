@@ -10,7 +10,9 @@
 #
 # The version always comes from package.json. Pushing tag v<version> or running
 # the workflow by hand builds <repo>-<version>.zip and publishes it as release
-# v<version>. If the plugin repo has a STORE_TOKEN secret, the store is rebuilt
+# v<version>. A version with a dash (0.2.0-beta.1) is published as a GitHub
+# prerelease and only shows in the store's testing channel. If the plugin repo
+# has a STORE_TOKEN secret, the store is rebuilt
 # straight away; otherwise the store's schedule picks it up within 30 minutes.
 
 name: Release plugin
@@ -39,6 +41,7 @@ jobs:
         run: |
           VERSION=$(jq -r .version package.json)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          case "$VERSION" in *-*) echo "prerelease=--prerelease" >> "$GITHUB_OUTPUT" ;; esac
           if [ "$GITHUB_REF_TYPE" = tag ] && [ "$GITHUB_REF_NAME" != "v$VERSION" ]; then
             echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $VERSION"
             exit 1
@@ -70,7 +73,8 @@ jobs:
       - name: Publish release
         run: |
           gh release create "v${{ steps.version.outputs.version }}" "${{ steps.package.outputs.zip }}" \
-            --title "v${{ steps.version.outputs.version }}" --generate-notes --target "$GITHUB_SHA"
+            --title "v${{ steps.version.outputs.version }}" --generate-notes --target "$GITHUB_SHA" \
+            ${{ steps.version.outputs.prerelease }}
 
       - name: Rebuild store
         env:

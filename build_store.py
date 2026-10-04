@@ -1,4 +1,4 @@
-"""Rebuild plugins.json from the plugin submodules and store.toml.
+"""Rebuild plugins.json and plugins-testing.json from the submodules and store.toml.
 
 Decky's custom store channel fetches one URL and parses the body as
 StorePlugin[] (decky-loader frontend/src/store.tsx). There is no API behind
@@ -6,7 +6,13 @@ it, so the whole store is this generated file plus worker.js to serve it.
 
 Every submodule under plugins/ that has an id in store.toml is listed. For
 each one this reads plugin.json from the repo on GitHub and every published
-stable release that carries a .zip.
+release that carries a .zip.
+
+Two channels come out of one run:
+  * plugins.json          stable releases only (what everyone gets)
+  * plugins-testing.json  stable releases plus GitHub prereleases, served by
+                          the worker at /testing for trying builds on a Deck
+A plugin with only prereleases appears in the testing channel alone.
 
 Rules Decky imposes on the output:
   * name must equal the plugin's own plugin.json name, or update checks and
@@ -32,6 +38,7 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "plugins.json")
+OUT_TESTING = os.path.join(ROOT, "plugins-testing.json")
 RAW = "https://raw.githubusercontent.com/%s/HEAD/%s"
 TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp")
@@ -48,9 +55,14 @@ def fetch(url, api=False):
 
 
 def semver(tag):
-    """Sort key. Unparseable parts sort last rather than crashing the run."""
-    parts = re.split(r"[.\-+]", tag.lstrip("vV"))
-    return tuple((0, int(p), "") if p.isdigit() else (-1, 0, p) for p in parts)
+    """Sort key: 1.0.0 > 1.0.0-beta.2 > 1.0.0-beta.1 > 0.9.0.
+
+    Unparseable parts sort last rather than crashing the run."""
+    def key(parts):
+        return tuple((0, int(p), "") if p.isdigit() else (-1, 0, p) for p in parts)
+    core, _, pre = tag.lstrip("vV").split("+", 1)[0].partition("-")
+    # A release outranks any prerelease of the same core version.
+    return (key(core.split(".")), (1,) if not pre else (0,) + key(pre.split(".")))
 
 
 def submodules():
@@ -66,9 +78,9 @@ def submodules():
     return found
 
 
-def previous():
+def previous(path):
     try:
-        with open(OUT, encoding="utf-8") as fh:
+        with open(path, encoding="utf-8") as fh:
             return json.load(fh)
     except (OSError, ValueError):
         return []
@@ -83,9 +95,10 @@ def image_for(key, repo, pj, entry):
     return pj.get("publish", {}).get("image") or ""
 
 
-def versions_for(repo, name, entry, cache):
+def versions_for(repo, name, cache):
+    """Every non-draft release, newest first, each tagged with "prerelease"."""
     releases = [r for r in json.loads(fetch("https://api.github.com/repos/%s/releases?per_page=100" % repo, api=True))
-                if not r["draft"] and (entry.get("prereleases") or not r["prerelease"])]
+                if not r["draft"]]
     releases.sort(key=lambda r: semver(r["tag_name"]), reverse=True)
 
     versions = []
@@ -108,8 +121,14 @@ def versions_for(repo, name, entry, cache):
             digest = hashlib.sha256(fetch(url)).hexdigest()
             if expected and expected != "sha256:" + digest:
                 raise ValueError("SHA-256 mismatch for " + url)
-        versions.append({"name": tag, "hash": digest, "artifact": url})
+        versions.append({"name": tag, "hash": digest, "artifact": url, "prerelease": rel["prerelease"]})
     return versions
+
+
+def write(path, store):
+    with open(path, "w", encoding="utf-8") as fh:
+        json.dump(store, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
 
 
 def build():
@@ -118,8 +137,10 @@ def build():
     defaults = config.get("defaults", {})
     entries = config.get("plugins", {})
     subs = submodules()
-    old = previous()
-    cache = {(p["name"], v["name"], v["artifact"]): v["hash"] for p in old for v in p["versions"]}
+    old = previous(OUT)
+    old_testing = previous(OUT_TESTING)
+    cache = {(p["name"], v["name"], v["artifact"]): v["hash"]
+             for p in old + old_testing for v in p["versions"]}
 
     for key in sorted(set(subs) - set(entries)):
         print("  %s: submodule has no [plugins.%s] id in store.toml, not listed" % (key, key))
@@ -128,7 +149,7 @@ def build():
     if dupes:
         raise ValueError("duplicate ids in store.toml: %s" % sorted(dupes))
 
-    store = []
+    store, testing = [], []
     for key, entry in entries.items():
         if entry.get("hidden"):
             continue
@@ -139,35 +160,40 @@ def build():
         try:
             pj = json.loads(fetch(RAW % (repo, "plugin.json")))
             name = entry.get("name", pj["name"])
-            versions = versions_for(repo, name, entry, cache)
+            versions = versions_for(repo, name, cache)
         except (urllib.error.URLError, ValueError, KeyError) as exc:
-            # Keep the last good entry rather than dropping a plugin from
+            # Keep the last good entries rather than dropping a plugin from
             # everyone's store because GitHub hiccuped.
             kept = next((p for p in old if p["id"] == entry["id"]), None)
-            print("  %s: %s%s" % (key, exc, " (kept previous entry)" if kept else ""))
+            kept_testing = next((p for p in old_testing if p["id"] == entry["id"]), None)
+            print("  %s: %s%s" % (key, exc, " (kept previous entry)" if kept or kept_testing else ""))
             if kept:
                 store.append(kept)
-            continue
-        if not versions:
-            print("  %-24s no releases yet, not listed" % name)
+            if kept_testing:
+                testing.append(kept_testing)
             continue
 
         pub = pj.get("publish", {})
-        store.append({
+        base = {
             "id": entry["id"],
             "name": name,
             "author": entry.get("author") or pj.get("author") or defaults.get("author", ""),
             "description": entry.get("description") or pub.get("description") or pj.get("description", ""),
             "tags": entry.get("tags") or pub.get("tags") or defaults.get("tags", []),
             "image_url": image_for(key, repo, pj, entry),
-            "versions": versions,
-        })
-        print("  %-24s %-10s %d version(s)" % (name, versions[0]["name"], len(versions)))
+        }
+        strip = lambda vs: [{k: v[k] for k in ("name", "hash", "artifact")} for v in vs]
+        stable = [v for v in versions if entry.get("prereleases") or not v["prerelease"]]
+        if stable:
+            store.append({**base, "versions": strip(stable)})
+        if versions:
+            testing.append({**base, "versions": strip(versions)})
+        print("  %-24s stable %-10s testing %-14s" % (
+            name, stable[0]["name"] if stable else "-", versions[0]["name"] if versions else "-"))
 
-    with open(OUT, "w", encoding="utf-8") as fh:
-        json.dump(store, fh, indent=2, ensure_ascii=False)
-        fh.write("\n")
-    print("wrote %d plugin(s) to plugins.json" % len(store))
+    write(OUT, store)
+    write(OUT_TESTING, testing)
+    print("wrote %d plugin(s) to plugins.json, %d to plugins-testing.json" % (len(store), len(testing)))
 
 
 if __name__ == "__main__":

@@ -6,8 +6,11 @@
 // store tab just spins forever. This worker answers the preflight and passes
 // the file through from GitHub. It never needs redeploying when a plugin is
 // released: it serves whatever plugins.json on main currently says.
+//
+// Two channels: the root URL serves stable releases (plugins.json), and
+// /testing serves stable plus prereleases (plugins-testing.json).
 
-const STORE = 'https://raw.githubusercontent.com/Marshy-Madness/MadnessDeckyStore/main/plugins.json';
+const RAW = 'https://raw.githubusercontent.com/Marshy-Madness/MadnessDeckyStore/main/';
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -18,6 +21,8 @@ const CORS = {
 
 export default {
   async fetch(request) {
+    const testing = new URL(request.url).pathname.replace(/\/+$/, '') === '/testing';
+
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS });
     }
@@ -26,7 +31,8 @@ export default {
     }
 
     // Short cache: a new release should show up within a minute or two.
-    const upstream = await fetch(STORE, { cf: { cacheTtl: 60 } });
+    const file = testing ? 'plugins-testing.json' : 'plugins.json';
+    const upstream = await fetch(RAW + file, { cf: { cacheTtl: 60 } });
     if (!upstream.ok) {
       return new Response(`Upstream returned ${upstream.status}`, { status: 502, headers: CORS });
     }
