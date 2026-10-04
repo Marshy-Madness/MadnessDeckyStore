@@ -54,6 +54,11 @@
     "image_url": "",
     "versions": [
       {
+        "name": "0.2.2-beta.8",
+        "hash": "635c16fc3c7920e272695814b401c88ef771ac661ee84fe60f4c4a3f3cba50f5",
+        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.8/decky-session-notes-0.2.2-beta.8.zip"
+      },
+      {
         "name": "0.2.2-beta.7",
         "hash": "6691b3e5565f7adf38c5cc16ddba91f4f112310654a8957c66c39d0548925b51",
         "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.7/decky-session-notes-0.2.2-beta.7.zip"
