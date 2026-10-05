@@ -180,5 +180,22 @@
         "artifact": "https://github.com/Marshy-Madness/gg-deals/releases/download/v0.1.0-beta.1/gg-deals-0.1.0-beta.1.zip"
       }
     ]
+  },
+  {
+    "id": 6,
+    "name": "Desk of Madness",
+    "author": "MarshyMadness",
+    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
+    "tags": [
+      "utility"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "0.3.0-beta.1",
+        "hash": "d1932647994eb9f0d6bfbec2bcc45face03ef90c85a3288cebf0c3a268c3361f",
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.3.0-beta.1/desk-of-madness-0.3.0-beta.1.zip"
+      }
+    ]
   }
 ]
