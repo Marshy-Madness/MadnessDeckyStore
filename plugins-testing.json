@@ -45,9 +45,9 @@
   },
   {
     "id": 3,
-    "name": "Desk of Madness",
+    "name": "Session Notes",
     "author": "MarshyMadness",
-    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
+    "description": "Replaced by Desk of Madness. Install Desk of Madness; it brings your notes across.",
     "tags": [
       "utility"
     ],
@@ -56,87 +56,87 @@
       {
         "name": "0.2.2-beta.13",
         "hash": "7cdf58f4d3f1071a39fd31ee10908eeb6456ba32a4dd6fd1ad3712d0b0af9196",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.13/decky-session-notes-0.2.2-beta.13.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.13/decky-session-notes-0.2.2-beta.13.zip"
       },
       {
         "name": "0.2.2-beta.12",
         "hash": "76d3dc1cca712fe3eb41527b681970ca7290ec547552b2c7e9da063ea8b3c435",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.12/decky-session-notes-0.2.2-beta.12.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.12/decky-session-notes-0.2.2-beta.12.zip"
       },
       {
         "name": "0.2.2-beta.11",
         "hash": "22a9049b35a9834fe5f4bcbddb9938b7be3a5255d99965817936e6dfd8adeeac",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.11/decky-session-notes-0.2.2-beta.11.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.11/decky-session-notes-0.2.2-beta.11.zip"
       },
       {
         "name": "0.2.2-beta.10",
         "hash": "091640611f4c33be1ffa36a19cb3dac9e5ed5c295b8978c00d9fdd3a53306563",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.10/decky-session-notes-0.2.2-beta.10.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.10/decky-session-notes-0.2.2-beta.10.zip"
       },
       {
         "name": "0.2.2-beta.9",
         "hash": "875639285effa3d7dfad2b58dfdead4e7af73c960dd38b5a3582f2dc95402ccb",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.9/decky-session-notes-0.2.2-beta.9.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.9/decky-session-notes-0.2.2-beta.9.zip"
       },
       {
         "name": "0.2.2-beta.8",
         "hash": "635c16fc3c7920e272695814b401c88ef771ac661ee84fe60f4c4a3f3cba50f5",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.8/decky-session-notes-0.2.2-beta.8.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.8/decky-session-notes-0.2.2-beta.8.zip"
       },
       {
         "name": "0.2.2-beta.7",
         "hash": "6691b3e5565f7adf38c5cc16ddba91f4f112310654a8957c66c39d0548925b51",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.7/decky-session-notes-0.2.2-beta.7.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.7/decky-session-notes-0.2.2-beta.7.zip"
       },
       {
         "name": "0.2.2-beta.6",
         "hash": "1dd8ed72e6b4723fd25b866af6b762c1a2848f0b2b6bc513d737bbd2f6e6730c",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.6/decky-session-notes-0.2.2-beta.6.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.6/decky-session-notes-0.2.2-beta.6.zip"
       },
       {
         "name": "0.2.2-beta.5",
         "hash": "46a9d89e36604a195f94a7b425f07302d5e09cd6617377fbf18e2cb583af820d",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.5/decky-session-notes-0.2.2-beta.5.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.5/decky-session-notes-0.2.2-beta.5.zip"
       },
       {
         "name": "0.2.2-beta.4",
         "hash": "d0fcb997328d5f823872280c0c9e4616140125a1fbc50e28179a6cfc0d3e0033",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.4/decky-session-notes-0.2.2-beta.4.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.4/decky-session-notes-0.2.2-beta.4.zip"
       },
       {
         "name": "0.2.2-beta.3",
         "hash": "498a315781b06201925ac65b6d44839b24f1f31e80dd8b8e586d4224caf66ec0",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.3/decky-session-notes-0.2.2-beta.3.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.3/decky-session-notes-0.2.2-beta.3.zip"
       },
       {
         "name": "0.2.2-beta.2",
         "hash": "b786258b92c6700e6786cdc90fe7da49ec717185202960433fe8c968f9d89a74",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.2/decky-session-notes-0.2.2-beta.2.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.2/decky-session-notes-0.2.2-beta.2.zip"
       },
       {
         "name": "0.2.2-beta.1",
         "hash": "7635289c8f5604aa9f455e700f56a936a4f85be2bcdfb6aaa5fb5ea35c3ae96a",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.1/decky-session-notes-0.2.2-beta.1.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.2-beta.1/decky-session-notes-0.2.2-beta.1.zip"
       },
       {
         "name": "0.2.1",
         "hash": "1d6758e5d280505d9ce189c7d4c80ca191b1c41c9cb15001fa27fd59b26d2db8",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.1/decky-session-notes-0.2.1.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.1/decky-session-notes-0.2.1.zip"
       },
       {
         "name": "0.2.0",
         "hash": "8fce7c9cbda766c60022573206e15b56e8dfa6424242029d97e60d3aefd7fce9",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.0/decky-session-notes-0.2.0.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.0/decky-session-notes-0.2.0.zip"
       },
       {
         "name": "0.1.0",
         "hash": "1f6dc15f74a7cc98b99281d2fab92cec12271b490e284359b36a7f6c65d419f5",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.1.0/decky-session-notes-0.1.0.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.1.0/decky-session-notes-0.1.0.zip"
       },
       {
         "name": "0.0.1",
         "hash": "2a2538bc3ac25471c153bdf46b6a9aa7a2d1849622d3683b8c69d0d621bc3175",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.0.1/decky-session-notes-0.0.1.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.0.1/decky-session-notes-0.0.1.zip"
       }
     ]
   },

@@ -161,6 +161,12 @@ def build():
             pj = json.loads(fetch(RAW % (repo, "plugin.json")))
             name = entry.get("name", pj["name"])
             versions = versions_for(repo, name, cache)
+            # min_version / max_version: list only part of a repo's releases (used when a plugin is renamed:
+            # the old name keeps its last releases, the new name starts from its first).
+            if entry.get("min_version"):
+                versions = [v for v in versions if semver(v["name"]) >= semver(entry["min_version"])]
+            if entry.get("max_version"):
+                versions = [v for v in versions if semver(v["name"]) <= semver(entry["max_version"])]
         except (urllib.error.URLError, ValueError, KeyError) as exc:
             # Keep the last good entries rather than dropping a plugin from
             # everyone's store because GitHub hiccuped.

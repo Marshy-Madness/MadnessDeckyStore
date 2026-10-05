@@ -9,6 +9,8 @@
 #   prereleases = true   also list GitHub prereleases in the stable channel
 #                        (the testing channel always lists them)
 #   hidden = true        pull it from the store without removing the submodule
+#   repo = "owner/name"  list a repo that isn't a submodule (e.g. a plugin's old name)
+#   min_version / max_version = "x.y.z"   only list releases in that range
 # Store artwork: assets/<folder>.png (or .jpg/.webp), 16:9 looks best.
 
 [defaults]
@@ -21,11 +23,21 @@ id = 1
 [plugins.decky-smart-launcher]
 id = 2
 
+# Session Notes was renamed Desk of Madness (0.3.0). Its old name stays listed with its last
+# releases so installed copies get the final one, which points to Desk of Madness.
 [plugins.decky-session-notes]
 id = 3
+repo = "Marshy-Madness/desk-of-madness"
+name = "Session Notes"
+max_version = "0.2.2-beta.13"
+description = "Replaced by Desk of Madness. Install Desk of Madness; it brings your notes across."
 
 [plugins.deck-launcher]
 id = 4
 
 [plugins.gg-deals]
 id = 5
+
+[plugins.desk-of-madness]
+id = 6
+min_version = "0.3.0-beta.1"

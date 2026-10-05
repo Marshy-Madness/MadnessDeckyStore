@@ -40,9 +40,9 @@
   },
   {
     "id": 3,
-    "name": "Desk of Madness",
+    "name": "Session Notes",
     "author": "MarshyMadness",
-    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
+    "description": "Replaced by Desk of Madness. Install Desk of Madness; it brings your notes across.",
     "tags": [
       "utility"
     ],
@@ -51,22 +51,22 @@
       {
         "name": "0.2.1",
         "hash": "1d6758e5d280505d9ce189c7d4c80ca191b1c41c9cb15001fa27fd59b26d2db8",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.1/decky-session-notes-0.2.1.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.1/decky-session-notes-0.2.1.zip"
       },
       {
         "name": "0.2.0",
         "hash": "8fce7c9cbda766c60022573206e15b56e8dfa6424242029d97e60d3aefd7fce9",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.0/decky-session-notes-0.2.0.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.2.0/decky-session-notes-0.2.0.zip"
       },
       {
         "name": "0.1.0",
         "hash": "1f6dc15f74a7cc98b99281d2fab92cec12271b490e284359b36a7f6c65d419f5",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.1.0/decky-session-notes-0.1.0.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.1.0/decky-session-notes-0.1.0.zip"
       },
       {
         "name": "0.0.1",
         "hash": "2a2538bc3ac25471c153bdf46b6a9aa7a2d1849622d3683b8c69d0d621bc3175",
-        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.0.1/decky-session-notes-0.0.1.zip"
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.0.1/decky-session-notes-0.0.1.zip"
       }
     ]
   },

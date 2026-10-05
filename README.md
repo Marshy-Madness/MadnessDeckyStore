@@ -10,7 +10,7 @@ Each plugin lives in **its own repository** and publishes its own releases. This
 |---|---|---|
 | Zipline Uploader | [zipline-auto-uploader](https://github.com/Marshy-Madness/zipline-auto-uploader) | Uploads new screenshots and recordings to your Zipline server |
 | Smart Game Launcher | [decky-smart-launcher](https://github.com/Marshy-Madness/decky-smart-launcher) | Picks the Steam, desktop or streamed version of a game based on availability and network |
-| Session Notes | [decky-session-notes](https://github.com/Marshy-Madness/decky-session-notes) | Per-game session notes, run tracking and stats |
+| Desk of Madness | [desk-of-madness](https://github.com/Marshy-Madness/desk-of-madness) | Game-aware desk: per-game notes, checklists, counters, guides and the Madness Workshop (formerly Session Notes) |
 | Deck Launcher | [deck-launcher](https://github.com/Marshy-Madness/deck-launcher) | Launch games remotely by NFC tap, QR code or Home Assistant |
 | gg.deals | [gg-deals](https://github.com/Marshy-Madness/gg-deals) | Shows the lowest current gg.deals price on Steam store pages |
 
