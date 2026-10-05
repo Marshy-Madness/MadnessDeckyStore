@@ -45,14 +45,19 @@
   },
   {
     "id": 3,
-    "name": "Session Notes",
+    "name": "Desk of Madness",
     "author": "MarshyMadness",
-    "description": "Per-game session notes, run tracking, and stats.",
+    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
     "tags": [
       "utility"
     ],
     "image_url": "",
     "versions": [
+      {
+        "name": "0.2.2-beta.13",
+        "hash": "7cdf58f4d3f1071a39fd31ee10908eeb6456ba32a4dd6fd1ad3712d0b0af9196",
+        "artifact": "https://github.com/Marshy-Madness/decky-session-notes/releases/download/v0.2.2-beta.13/decky-session-notes-0.2.2-beta.13.zip"
+      },
       {
         "name": "0.2.2-beta.12",
         "hash": "76d3dc1cca712fe3eb41527b681970ca7290ec547552b2c7e9da063ea8b3c435",

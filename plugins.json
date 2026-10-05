@@ -40,9 +40,9 @@
   },
   {
     "id": 3,
-    "name": "Session Notes",
+    "name": "Desk of Madness",
     "author": "MarshyMadness",
-    "description": "Per-game session notes, run tracking, and stats.",
+    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
     "tags": [
       "utility"
     ],
