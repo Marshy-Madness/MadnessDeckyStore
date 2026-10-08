@@ -91,5 +91,22 @@
         "artifact": "https://github.com/Marshy-Madness/deck-launcher/releases/download/v1.0.0/deck-launcher-1.0.0.zip"
       }
     ]
+  },
+  {
+    "id": 6,
+    "name": "Desk of Madness",
+    "author": "MarshyMadness",
+    "description": "Your Deck. Your Notes. Your Madness. A game-aware desk for per-game notes, checklists, counters, guides and the Madness Workshop.",
+    "tags": [
+      "utility"
+    ],
+    "image_url": "",
+    "versions": [
+      {
+        "name": "0.3.0",
+        "hash": "50344e4e0e070f29a74e617700ba70e1dd52826fb593c99c23522a46c6640f7b",
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.3.0/desk-of-madness-0.3.0.zip"
+      }
+    ]
   }
 ]
