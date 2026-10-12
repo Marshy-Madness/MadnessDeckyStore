@@ -192,6 +192,11 @@
     "image_url": "",
     "versions": [
       {
+        "name": "0.4.0-beta.3",
+        "hash": "a39aa9d8ba2d11c7032685996511409c01d7be076e4a3345835330d8587dad00",
+        "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.4.0-beta.3/desk-of-madness-0.4.0-beta.3.zip"
+      },
+      {
         "name": "0.4.0-beta.2",
         "hash": "57511191c32ff1f50ebaec094233fa7c15a1c45f7bfff593cc8046fd820b927f",
         "artifact": "https://github.com/Marshy-Madness/desk-of-madness/releases/download/v0.4.0-beta.2/desk-of-madness-0.4.0-beta.2.zip"
