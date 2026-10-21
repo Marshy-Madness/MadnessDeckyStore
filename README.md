@@ -34,6 +34,10 @@ https://madness-decky-store.<your-subdomain>.workers.dev/testing
 
 It lists every stable release plus prereleases, newest first, so you get update prompts for both. Plugins that only have prereleases so far appear only here. Switch back to the plain URL to go back to stable. Installed prerelease versions stay installed and get replaced when the next stable release comes out. Switching back to **Default** brings back the official store, and installed plugins stay installed. Only one channel is active at a time, so plugins from the official store won't show update prompts while you're on Custom.
 
+### Known Decky quirk: the trust warning keeps coming back
+
+Decky's *Third-Party Store Selection* warning is shown from the settings page's render, so it pops up again whenever that page redraws (typing the URL, coming back to the page). It's a Decky Loader bug, not this store: pick **Continue** and leave the settings page. It only has to wait the 5 seconds the first time, and it doesn't affect installs or updates.
+
 ## How it works
 
 Decky's custom store is a single URL that returns a JSON list of plugins and their versions. Each version has a zip URL and a SHA-256 hash.

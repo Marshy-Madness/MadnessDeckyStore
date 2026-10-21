@@ -9,6 +9,11 @@
 //
 // Two channels: the root URL serves stable releases (plugins.json), and
 // /testing serves stable plus prereleases (plugins-testing.json).
+//
+// Update checks: newer Decky asks <store URL>/versions for just the newest
+// version of each plugin, as { "<name>": [version, hash, artifact] }, instead
+// of reading the full list. Without an answer in that shape it never offers
+// an update, so /versions and /testing/versions are built from the same files.
 
 const RAW = 'https://raw.githubusercontent.com/Marshy-Madness/MadnessDeckyStore/main/';
 
@@ -21,7 +26,10 @@ const CORS = {
 
 export default {
   async fetch(request) {
-    const testing = new URL(request.url).pathname.replace(/\/+$/, '') === '/testing';
+    let path = new URL(request.url).pathname.replace(/\/+$/, '');
+    const versions = path.endsWith('/versions');
+    if (versions) path = path.slice(0, -'/versions'.length);
+    const testing = path === '/testing';
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS });
@@ -36,9 +44,17 @@ export default {
     if (!upstream.ok) {
       return new Response(`Upstream returned ${upstream.status}`, { status: 502, headers: CORS });
     }
-    return new Response(upstream.body, {
-      status: 200,
-      headers: { ...CORS, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-cache' },
-    });
+    const headers = { ...CORS, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-cache' };
+    if (!versions) {
+      return new Response(upstream.body, { status: 200, headers });
+    }
+
+    // Each plugin's versions are listed newest first.
+    const latest = {};
+    for (const plugin of await upstream.json()) {
+      const v = plugin.versions?.[0];
+      if (v) latest[plugin.name] = [v.name, v.hash, v.artifact];
+    }
+    return new Response(JSON.stringify(latest), { status: 200, headers });
   },
 };
